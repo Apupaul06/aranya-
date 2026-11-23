@@ -244,14 +244,30 @@ function screen(title, body, showBack){
 
 let DEMO_MODE = false;
 
+
+/* Chhobi photos/ folder e thakte pare, ba repo root e. Dono try karo. */
+function altPath(u){
+  if (/^https?:/i.test(u)) return "";
+  return u.indexOf("photos/") === 0 ? u.slice(7) : "photos/" + u;
+}
+function imgTag(cls, url, alt){
+  const a = altPath(url);
+  return '<img' + (cls ? ' class="' + cls + '"' : '') +
+    ' src="' + esc(url) + '"' +
+    (a ? ' data-alt="' + esc(a) + '"' : '') +
+    ' alt="' + esc(alt) + '" loading="lazy"' +
+    ' onerror="if(this.dataset.alt&&!this.dataset.tried){this.dataset.tried=1;this.src=this.dataset.alt;}' +
+    'else{this.style.display=\'none\';}">';
+}
+
 /* Photo Link mein comma se alag karke kai photo daal sakte ho */
 function gallery(raw, alt){
   const urls = clean(raw).split(",").map(u => u.trim()).filter(Boolean).map(driveImage);
   if (!urls.length) return "";
   if (urls.length === 1)
-    return '<figure><img src="' + esc(urls[0]) + '" alt="' + esc(alt) + '" loading="lazy"></figure>';
+    return '<figure>' + imgTag("", urls[0], alt) + '</figure>';
   return '<figure><div class="gal" id="gal">' +
-    urls.map(u => '<img src="' + esc(u) + '" alt="' + esc(alt) + '" loading="lazy">').join("") +
+    urls.map(u => imgTag("", u, alt)).join("") +
     '</div><div class="dots" id="dots">' +
     urls.map((_, i) => '<i class="' + (i ? "" : "on") + '"></i>').join("") +
     '</div></figure>';
