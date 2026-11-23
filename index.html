@@ -36,9 +36,11 @@
 
   .grid{display:grid;gap:10px}
   a.item{
-    display:block;text-decoration:none;color:inherit;background:var(--card);
-    border:1px solid var(--line);border-radius:12px;padding:14px 15px
+    display:flex;gap:13px;text-decoration:none;color:inherit;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;padding:13px 14px
   }
+  .thumb{width:74px;height:74px;flex:0 0 74px;border-radius:9px;object-fit:cover;background:#efece3}
+  .body{flex:1;min-width:0}
   a.item:active{background:#f3f1ea}
   .nm{font-size:18px;font-weight:700;line-height:1.25}
   .hi{font-size:14px;color:var(--muted);margin-top:1px}
@@ -60,6 +62,7 @@
     input[type=search],.f{background:#1d2124;color:var(--bark)}
     .tag{background:#242a2d}
     .tag.id{background:#1f3326;color:#8fd0a3;border-color:#2c4a36}
+    .thumb{background:#242a2d}
     a.item:active{background:#242a2d}
     .banner{background:#2a2113;border-color:#4a3c20;color:#e0bd7f}
   }
@@ -95,21 +98,25 @@ const SHEET_CSV_URL = "";
 const RECORD_PAGE   = "t.html";
 
 const DEMO_ROWS = [
-  {"Tree ID":"ARN-TNT-0001","Local Name (Ho)":"Sarjoom","Common Name (Hindi)":"Sal","Scientific Name":"Shorea robusta","Family":"Dipterocarpaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0002","Local Name (Ho)":"Madkam Daru","Common Name (Hindi)":"Mahua","Scientific Name":"Madhuca longifolia","Family":"Sapotaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0003","Local Name (Ho)":"Baru Daru","Common Name (Hindi)":"Kusum","Scientific Name":"Schleichera oleosa","Family":"Sapindaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0004","Local Name (Ho)":"Hatna Daru","Common Name (Hindi)":"Asan / Saja","Scientific Name":"Terminalia alata","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0005","Local Name (Ho)":"Murud Daru","Common Name (Hindi)":"Palash","Scientific Name":"Butea monosperma","Family":"Fabaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0006","Local Name (Ho)":"Rola","Common Name (Hindi)":"Harra","Scientific Name":"Terminalia chebula","Family":"Combretaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0007","Local Name (Ho)":"Lupung Daru","Common Name (Hindi)":"Bahera","Scientific Name":"Terminalia bellirica","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0008","Local Name (Ho)":"Meral Daru","Common Name (Hindi)":"Amla","Scientific Name":"Phyllanthus emblica","Family":"Phyllanthaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"},
-  {"Tree ID":"ARN-TNT-0009","Local Name (Ho)":"Tarob Daru","Common Name (Hindi)":"Char / Piar","Scientific Name":"Buchanania lanzan","Family":"Anacardiaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"},
-  {"Tree ID":"ARN-NMD-0010","Local Name (Ho)":"Kuda Daru","Common Name (Hindi)":"Jamun","Scientific Name":"Syzygium cumini","Family":"Myrtaceae","Habit":"Tree","Block":"Tonto","Tag Status":"Pending"}
+  {"Tree ID":"ARN-TNT-0001","Local Name (Ho)":"Sarjoom","Common Name (Hindi)":"Sal","Scientific Name":"Shorea robusta","Family":"Dipterocarpaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-TNT-0001.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0002","Local Name (Ho)":"Madkam Daru","Common Name (Hindi)":"Mahua","Scientific Name":"Madhuca longifolia","Family":"Sapotaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-TNT-0002.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0003","Local Name (Ho)":"Baru Daru","Common Name (Hindi)":"Kusum","Scientific Name":"Schleichera oleosa","Family":"Sapindaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-TNT-0003.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0004","Local Name (Ho)":"Hatna Daru","Common Name (Hindi)":"Asan / Saja","Scientific Name":"Terminalia alata","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Photo Link":"photos/ARN-TNT-0004.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0005","Local Name (Ho)":"Murud Daru","Common Name (Hindi)":"Palash","Scientific Name":"Butea monosperma","Family":"Fabaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-TNT-0005.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0006","Local Name (Ho)":"Rola","Common Name (Hindi)":"Harra","Scientific Name":"Terminalia chebula","Family":"Combretaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-TNT-0006.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0007","Local Name (Ho)":"Lupung Daru","Common Name (Hindi)":"Bahera","Scientific Name":"Terminalia bellirica","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Photo Link":"photos/ARN-TNT-0007.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0008","Local Name (Ho)":"Meral Daru","Common Name (Hindi)":"Amla","Scientific Name":"Phyllanthus emblica","Family":"Phyllanthaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-TNT-0008.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-TNT-0009","Local Name (Ho)":"Tarob Daru","Common Name (Hindi)":"Char / Piar","Scientific Name":"Buchanania lanzan","Family":"Anacardiaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-TNT-0009.jpg","Tag Status":"Pending"},
+  {"Tree ID":"ARN-NMD-0010","Local Name (Ho)":"Kuda Daru","Common Name (Hindi)":"Jamun","Scientific Name":"Syzygium cumini","Family":"Myrtaceae","Habit":"Tree","Block":"Tonto","Photo Link":"photos/ARN-NMD-0010.jpg","Tag Status":"Pending"}
 ];
 
 const app = document.getElementById("app");
 const qBox = document.getElementById("q");
 const filtersEl = document.getElementById("filters");
+function driveImage(url){
+  const m = /drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([\w-]{20,})/.exec(url);
+  return m ? "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w400" : url;
+}
 const esc = s => String(s == null ? "" : s).replace(/&/g,"&amp;").replace(/</g,"&lt;")
   .replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 const clean = v => (v == null ? "" : String(v).trim());
@@ -158,7 +165,10 @@ function draw(){
     list.map(t=>{
       const nm=clean(t["Local Name (Ho)"])||clean(t["Common Name (Hindi)"])||clean(t["Scientific Name"]);
       const hi=clean(t["Common Name (Hindi)"]);
+      const ph = clean(t["Photo Link"]).split(",")[0].trim();
       return '<a class="item" href="'+esc(RECORD_PAGE)+'?id='+encodeURIComponent(t["Tree ID"])+'">'+
+        (ph ? '<img class="thumb" src="'+esc(driveImage(ph))+'" alt="" loading="lazy">' : '')+
+        '<div class="body">'+
         '<div class="nm">'+esc(nm)+'</div>'+
         (hi && hi!==nm ? '<div class="hi">'+esc(hi)+'</div>' : '')+
         (clean(t["Scientific Name"]) ? '<div class="sc">'+esc(t["Scientific Name"])+'</div>' : '')+
@@ -166,7 +176,7 @@ function draw(){
           (clean(t["Village"]) ? '<span class="tag">'+esc(t["Village"])+'</span>' : '')+
           (clean(t["Block"]) ? '<span class="tag">'+esc(t["Block"])+'</span>' : '')+
           (clean(t["Family"]) ? '<span class="tag">'+esc(t["Family"])+'</span>' : '')+
-        '</div></a>';
+        '</div></div></a>';
     }).join("")+'</div>';
 }
 

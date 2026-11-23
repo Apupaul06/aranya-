@@ -58,6 +58,20 @@
 
   figure{margin:0;background:#efece3}
   figure img{display:block;width:100%;height:auto}
+  .gal{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:0;
+       -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gal::-webkit-scrollbar{display:none}
+  .gal img{flex:0 0 100%;scroll-snap-align:center;display:block;width:100%;height:auto}
+  .dots{display:flex;justify-content:center;gap:6px;padding:9px 0 3px;background:#efece3}
+  .dots i{width:6px;height:6px;border-radius:50%;background:#c3bdb0;display:block}
+  .dots i.on{background:var(--leaf)}
+
+  .qr{padding:18px;border-top:1px solid var(--line);text-align:center}
+  .qr b{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;
+        color:var(--muted);margin-bottom:12px;font-weight:600}
+  .qr img{width:170px;height:170px;background:#fff;padding:9px;border-radius:10px;border:1px solid var(--line)}
+  .qr .dl{display:inline-block;margin-top:12px;font-size:13.5px;font-weight:600;
+          color:var(--leaf-2);text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
 
   dl{margin:0;padding:6px 18px 14px}
   .row{display:flex;gap:14px;padding:11px 0;border-bottom:1px solid #f0ece2}
@@ -110,6 +124,8 @@
     .report{background:#191d20;border-color:#333a3e}
     .btn{background:#242a2d;color:var(--bark)}
     figure{background:#242a2d}
+    .dots{background:#242a2d}
+    .qr img{background:#fff}
     .picker{margin-top:16px;padding:13px 14px;border:1px solid var(--line);border-radius:12px;background:#fbfaf6}
   .picker b{display:block;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin-bottom:9px;font-weight:600}
   .picker .pills{display:flex;flex-wrap:wrap;gap:7px}
@@ -156,16 +172,16 @@ const HERBARIUM_URL = "./";
    Sheet publish karte hi isse hataya ja sakta hai.
    ════════════════════════════════════════════════════════════════ */
 const DEMO_ROWS = [
-  {"Tree ID":"ARN-TNT-0001","Local Name (Ho)":"Sarjoom","Common Name (Hindi)":"Sal","Scientific Name":"Shorea robusta","Family":"Dipterocarpaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Saranda ka dominant canopy species"},
-  {"Tree ID":"ARN-TNT-0002","Local Name (Ho)":"Madkam Daru","Common Name (Hindi)":"Mahua","Scientific Name":"Madhuca longifolia","Family":"Sapotaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Wild food + NTFP; seasonal food calendar ke liye important"},
-  {"Tree ID":"ARN-TNT-0003","Local Name (Ho)":"Baru Daru","Common Name (Hindi)":"Kusum","Scientific Name":"Schleichera oleosa","Family":"Sapindaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Lac host tree"},
-  {"Tree ID":"ARN-TNT-0004","Local Name (Ho)":"Hatna Daru","Common Name (Hindi)":"Asan / Saja","Scientific Name":"Terminalia alata","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Lac host tree; tasar host bhi"},
-  {"Tree ID":"ARN-TNT-0005","Local Name (Ho)":"Murud Daru","Common Name (Hindi)":"Palash","Scientific Name":"Butea monosperma","Family":"Fabaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Lac host tree"},
-  {"Tree ID":"ARN-TNT-0006","Local Name (Ho)":"Rola","Common Name (Hindi)":"Harra","Scientific Name":"Terminalia chebula","Family":"Combretaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Triphala NTFP"},
-  {"Tree ID":"ARN-TNT-0007","Local Name (Ho)":"Lupung Daru","Common Name (Hindi)":"Bahera","Scientific Name":"Terminalia bellirica","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Triphala NTFP"},
-  {"Tree ID":"ARN-TNT-0008","Local Name (Ho)":"Meral Daru","Common Name (Hindi)":"Amla","Scientific Name":"Phyllanthus emblica","Family":"Phyllanthaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Triphala NTFP; Van Saheli value chain"},
-  {"Tree ID":"ARN-TNT-0009","Local Name (Ho)":"Tarob Daru","Common Name (Hindi)":"Char / Piar","Scientific Name":"Buchanania lanzan","Family":"Anacardiaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Chironji — high value NTFP"},
-  {"Tree ID":"ARN-NMD-0010","Local Name (Ho)":"Kuda Daru","Common Name (Hindi)":"Jamun","Scientific Name":"Syzygium cumini","Family":"Myrtaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Tag Status":"Pending","Notes":"Wild food"}
+  {"Tree ID":"ARN-TNT-0001","Local Name (Ho)":"Sarjoom","Common Name (Hindi)":"Sal","Scientific Name":"Shorea robusta","Family":"Dipterocarpaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0001.jpg","Tag Status":"Pending","Notes":"Saranda ka dominant canopy species"},
+  {"Tree ID":"ARN-TNT-0002","Local Name (Ho)":"Madkam Daru","Common Name (Hindi)":"Mahua","Scientific Name":"Madhuca longifolia","Family":"Sapotaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0002.jpg","Tag Status":"Pending","Notes":"Wild food + NTFP; seasonal food calendar ke liye important"},
+  {"Tree ID":"ARN-TNT-0003","Local Name (Ho)":"Baru Daru","Common Name (Hindi)":"Kusum","Scientific Name":"Schleichera oleosa","Family":"Sapindaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0003.jpg","Tag Status":"Pending","Notes":"Lac host tree"},
+  {"Tree ID":"ARN-TNT-0004","Local Name (Ho)":"Hatna Daru","Common Name (Hindi)":"Asan / Saja","Scientific Name":"Terminalia alata","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0004.jpg","Tag Status":"Pending","Notes":"Lac host tree; tasar host bhi"},
+  {"Tree ID":"ARN-TNT-0005","Local Name (Ho)":"Murud Daru","Common Name (Hindi)":"Palash","Scientific Name":"Butea monosperma","Family":"Fabaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0005.jpg","Tag Status":"Pending","Notes":"Lac host tree"},
+  {"Tree ID":"ARN-TNT-0006","Local Name (Ho)":"Rola","Common Name (Hindi)":"Harra","Scientific Name":"Terminalia chebula","Family":"Combretaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0006.jpg","Tag Status":"Pending","Notes":"Triphala NTFP"},
+  {"Tree ID":"ARN-TNT-0007","Local Name (Ho)":"Lupung Daru","Common Name (Hindi)":"Bahera","Scientific Name":"Terminalia bellirica","Family":"Combretaceae","Habit":"Tree","Block":"Noamundi","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0007.jpg","Tag Status":"Pending","Notes":"Triphala NTFP"},
+  {"Tree ID":"ARN-TNT-0008","Local Name (Ho)":"Meral Daru","Common Name (Hindi)":"Amla","Scientific Name":"Phyllanthus emblica","Family":"Phyllanthaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0008.jpg","Tag Status":"Pending","Notes":"Triphala NTFP; Van Saheli value chain"},
+  {"Tree ID":"ARN-TNT-0009","Local Name (Ho)":"Tarob Daru","Common Name (Hindi)":"Char / Piar","Scientific Name":"Buchanania lanzan","Family":"Anacardiaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-TNT-0009.jpg","Tag Status":"Pending","Notes":"Chironji — high value NTFP"},
+  {"Tree ID":"ARN-NMD-0010","Local Name (Ho)":"Kuda Daru","Common Name (Hindi)":"Jamun","Scientific Name":"Syzygium cumini","Family":"Myrtaceae","Habit":"Tree","Block":"Tonto","Origin":"Native (wild)","Photo Link":"photos/ARN-NMD-0010.jpg","Tag Status":"Pending","Notes":"Wild food"}
 ];
 
 /* ════════════════════════════════════════════════════════════════
@@ -228,6 +244,42 @@ function screen(title, body, showBack){
 
 let DEMO_MODE = false;
 
+/* Photo Link mein comma se alag karke kai photo daal sakte ho */
+function gallery(raw, alt){
+  const urls = clean(raw).split(",").map(u => u.trim()).filter(Boolean).map(driveImage);
+  if (!urls.length) return "";
+  if (urls.length === 1)
+    return '<figure><img src="' + esc(urls[0]) + '" alt="' + esc(alt) + '" loading="lazy"></figure>';
+  return '<figure><div class="gal" id="gal">' +
+    urls.map(u => '<img src="' + esc(u) + '" alt="' + esc(alt) + '" loading="lazy">').join("") +
+    '</div><div class="dots" id="dots">' +
+    urls.map((_, i) => '<i class="' + (i ? "" : "on") + '"></i>').join("") +
+    '</div></figure>';
+}
+
+/* Is ped ka apna QR — wahi URL jo tag par chhapa hai */
+function recordURL(id){
+  return location.origin + location.pathname + "?id=" + encodeURIComponent(id);
+}
+function qrBlock(id){
+  const api = "https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=10&data=" +
+              encodeURIComponent(recordURL(id));
+  return '<div class="qr"><b>Is ped ka QR</b>' +
+    '<img src="' + esc(api) + '" alt="QR ' + esc(id) + '" loading="lazy" ' +
+    'onerror="this.closest(\'.qr\').style.display=\'none\'">' +
+    '<br><a class="dl" href="' + esc(api) + '" download="' + esc(id) + '-qr.png" target="_blank" rel="noopener">QR download karo</a>' +
+    '</div>';
+}
+
+function wireGallery(){
+  const g = document.getElementById("gal"), d = document.getElementById("dots");
+  if (!g || !d) return;
+  g.addEventListener("scroll", () => {
+    const i = Math.round(g.scrollLeft / g.clientWidth);
+    [...d.children].forEach((x, n) => x.classList.toggle("on", n === i));
+  }, {passive:true});
+}
+
 function demoPicker(curId){
   return '<div class="picker"><b>Demo — doosra ped dekhne ke liye tap karo</b><div class="pills">' +
     DEMO_ROWS.map(r =>
@@ -273,9 +325,10 @@ function render(t, note){
           (status ? '<span class="chip' + (/verified|tagged/i.test(status) ? " on" : "") + '">' + esc(status) + '</span>' : "") +
         '</div>' +
       '</div>' +
-      (photo ? '<figure><img src="' + esc(driveImage(photo)) + '" alt="' + esc(name) + '" loading="lazy"></figure>' : "") +
+      gallery(photo, name) +
       '<dl>' + rows.map(r => '<div class="row"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>').join("") + '</dl>' +
       (has(t["Notes"]) ? '<div class="notes"><b>Note</b>' + esc(t["Notes"]) + '</div>' : "") +
+      qrBlock(clean(t["Tree ID"])) +
     '</div>' +
 
     '<div class="actions">' +
@@ -299,6 +352,7 @@ function render(t, note){
     'Reviving Native Biodiversity through Community-led In-situ Conservation</footer>';
 
   document.title = name + " · ARANYA";
+  wireGallery();
 }
 
 function findRow(list, id){
